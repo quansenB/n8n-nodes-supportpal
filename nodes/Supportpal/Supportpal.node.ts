@@ -2,28 +2,12 @@ import { IExecuteFunctions } from 'n8n-core';
 
 import { IDataObject, INodeExecutionData, INodeType, INodeTypeDescription } from 'n8n-workflow';
 
-import { supportpalApiRequest } from './GenericFunctions';
+import { supportpalApiRequest, simplify } from './GenericFunctions';
 import { usersDescription } from './UsersDescription';
 import { reportDescription } from './ReportDescription';
 import { organisationsDescription } from './OrganisationsDescription';
 import { ticketsDescription } from './TicketsDescription';
 import { messageDescription } from './MessageDescription';
-
-type customFields = {
-	fields: field[];
-};
-
-type Permissions = {
-	fields: permission[];
-};
-
-type field = {
-	[name: string]: string;
-};
-
-type permission = {
-	[permission: string]: string;
-};
 
 export class Supportpal implements INodeType {
 	description: INodeTypeDescription = {
@@ -171,12 +155,10 @@ export class Supportpal implements INodeType {
 		const returnData: IDataObject[] = [];
 		const resource = this.getNodeParameter('resource', 0) as string;
 		const operation = this.getNodeParameter('operation', 0) as string;
-		const staticData = this.getWorkflowStaticData('node') as IDataObject;
 		let endpoint = '';
 		let requestMethod = '';
 
 		let body: IDataObject = {};
-		/* tslint:disable-next-line */
 		let qs: IDataObject = {};
 		let responseData;
 
@@ -194,6 +176,7 @@ export class Supportpal implements INodeType {
 						qs.email = this.getNodeParameter('email', i) as string;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         user:update
@@ -205,6 +188,7 @@ export class Supportpal implements INodeType {
 						qs = this.getNodeParameter('optionalFields', i) as IDataObject;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         user:delete
@@ -225,6 +209,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/user/user/' + userId;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         user:getAll
@@ -234,6 +219,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/user/user';
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 				} else if (resource === 'organisation') {
 					// ----------------------------------
@@ -247,6 +233,7 @@ export class Supportpal implements INodeType {
 						qs.name = this.getNodeParameter('name', i) as string;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         organisation:update
@@ -258,6 +245,7 @@ export class Supportpal implements INodeType {
 						qs = this.getNodeParameter('optionalFields', i) as IDataObject;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         organisation:delete
@@ -278,6 +266,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/user/organisation/' + organisationId;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         organisation:getAll
@@ -287,6 +276,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/user/organisation';
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 				} else if (resource === 'ticket') {
 					// ----------------------------------
@@ -305,6 +295,7 @@ export class Supportpal implements INodeType {
 						qs.text = this.getNodeParameter('text', i) as string;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         ticket:update
@@ -316,6 +307,7 @@ export class Supportpal implements INodeType {
 						qs = this.getNodeParameter('optionalFields', i) as IDataObject;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         ticket:delete
@@ -336,6 +328,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/ticket/ticket/' + ticketId;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         ticket:getAll
@@ -345,6 +338,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/ticket/ticket';
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 				} else if (resource === 'message') {
 					// ----------------------------------
@@ -360,6 +354,7 @@ export class Supportpal implements INodeType {
 						qs.text = this.getNodeParameter('text', i) as string;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         message:update
@@ -372,6 +367,7 @@ export class Supportpal implements INodeType {
 						qs.text = this.getNodeParameter('text', i) as string;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         message:delete
@@ -392,6 +388,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/ticket/message/' + messageId;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         message:getAll
@@ -403,6 +400,7 @@ export class Supportpal implements INodeType {
 						qs.ticket_id = this.getNodeParameter('ticket_id', i) as string;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 				} else if (resource === 'report') {
 					// ----------------------------------
@@ -415,6 +413,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/' + category + '/' + name;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 					// ----------------------------------
 					//         report:getAll
@@ -424,6 +423,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/report';
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
+						responseData = simplify.call(this, responseData, i);
 					}
 				}
 				if (Array.isArray(responseData)) {

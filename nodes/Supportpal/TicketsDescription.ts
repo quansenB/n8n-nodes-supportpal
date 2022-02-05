@@ -203,35 +203,35 @@ export const ticketsDescription = [
 			{
 				displayName: 'Tag IDs',
 				name: 'tag',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of tag IDs for the new ticket.',
 			},
 			{
 				displayName: 'Assigned To',
 				name: 'assignedto',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of operator IDs that are assigned to the new ticket.',
 			},
 			{
 				displayName: 'Watching',
 				name: 'watching',
-				type: 'sting',
+				type: 'json',
 				default: '',
 				description: 'An array of operator IDs that are watching the new ticket.',
 			},
 			{
 				displayName: 'Custom Fields',
 				name: 'customfield',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of custom fields values, keyed by their ID.',
 			},
 			{
 				displayName: 'CC',
 				name: 'cc',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of email addresses to CC on the ticket.',
 			},
@@ -252,7 +252,7 @@ export const ticketsDescription = [
 			{
 				displayName: 'Attachments',
 				name: 'attachment',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description:
 					'A multi-dimensional array of attachments in the format of ‘attachment[n][filename]’ (attachment filename) and ‘attachment[n][contents]’ (base64-encoded file contents).',
@@ -336,21 +336,21 @@ export const ticketsDescription = [
 			{
 				displayName: 'Tag IDs',
 				name: 'tag',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of tag IDs for the ticket (overwrites existing tags).',
 			},
 			{
 				displayName: 'Assigned To',
 				name: 'assignedto',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of operator IDs that are assigned to the ticket.',
 			},
 			{
 				displayName: 'Watching',
 				name: 'watching',
-				type: 'sting',
+				type: 'json',
 				default: '',
 				description: 'An array of operator IDs that are watching the ticket.',
 			},
@@ -371,7 +371,7 @@ export const ticketsDescription = [
 			{
 				displayName: 'Custom Fields',
 				name: 'customfield',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description:
 					'An array of custom fields values, keyed by their ID. (Overwrites existing custom fields).',
@@ -379,7 +379,7 @@ export const ticketsDescription = [
 			{
 				displayName: 'CC',
 				name: 'cc',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description:
 					'An array of email addresses to CC on the ticket. (Overwrites existing CC emails).',

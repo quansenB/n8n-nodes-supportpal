@@ -70,7 +70,7 @@ export const organisationsDescription = [
 			{
 				displayName: 'Custom Fields',
 				name: 'customfield',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of custom fields values, keyed by their ID.',
 			},
@@ -107,7 +107,7 @@ export const organisationsDescription = [
 			{
 				displayName: 'Domain',
 				name: 'domain',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description:
 					'An array of strings that represent the domains belonging to the organisation, for example "domain.com". Will be used to automatically add users who register or email the help desk from one of the domains listed.',
@@ -115,7 +115,7 @@ export const organisationsDescription = [
 			{
 				displayName: 'Access Level',
 				name: 'groups',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description:
 					'An array of user access levels in organisation, keyed by the user ID. 0 - Manager, 1 - User.',
@@ -146,7 +146,7 @@ export const organisationsDescription = [
 			{
 				displayName: 'Custom Fields',
 				name: 'customfield',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of custom fields values, keyed by their ID.',
 			},
@@ -183,7 +183,7 @@ export const organisationsDescription = [
 			{
 				displayName: 'Domain',
 				name: 'domain',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description:
 					'An array of strings that represent the domains belonging to the organisation, for example "domain.com". Will be used to automatically add users who register or email the help desk from one of the domains listed.',
@@ -191,7 +191,7 @@ export const organisationsDescription = [
 			{
 				displayName: 'Access Level',
 				name: 'groups',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description:
 					'An array of user access levels in organisation, keyed by the user ID. 0 - Manager, 1 - User.',

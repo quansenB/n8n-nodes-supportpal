@@ -118,7 +118,7 @@ export const messageDescription = [
 			{
 				displayName: 'Attachments',
 				name: 'attachment',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description:
 					'A multi-dimensional array of attachments in the format of "attachment[n][filename]" (attachment filename) and "attachment[n][contents]" (base64-encoded file contents).',
@@ -126,7 +126,7 @@ export const messageDescription = [
 			{
 				displayName: 'CC',
 				name: 'cc',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of email addresses to CC on the ticket.',
 			},

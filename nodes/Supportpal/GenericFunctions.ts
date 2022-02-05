@@ -12,6 +12,19 @@ import { OptionsWithUri } from 'request';
 
 import axios from 'axios';
 
+export function simplify(
+	this: IHookFunctions | IExecuteFunctions | ILoadOptionsFunctions,
+	responseData: IDataObject,
+	index: number,
+): IDataObject {
+	const simplify = this.getNodeParameter('simplify', index) as boolean;
+	if (simplify && responseData.data) {
+		//@ts-ignore
+		return responseData.data;
+	}
+	return responseData;
+}
+
 /**
  * Make an API request to Supportpal
  *
@@ -50,9 +63,6 @@ export async function supportpalApiRequest(
 		auth: {
 			user: credentials.apiKey as string,
 		},
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
 		method,
 		qs,
 		uri: `${credentials.supportpalUrl}${endpoint}`,
@@ -68,13 +78,6 @@ export async function supportpalApiRequest(
 		const responseData = await this.helpers.request!(options);
 		if (responseData && responseData.success === false) {
 			throw new NodeApiError(this.getNode(), responseData);
-		}
-
-		if (method !== 'DELETE') {
-			const simplify = this.getNodeParameter('simplify', 0) as boolean;
-			if (simplify) {
-				return responseData.data;
-			}
 		}
 
 		return responseData;

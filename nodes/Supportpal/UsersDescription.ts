@@ -94,7 +94,7 @@ export const usersDescription = [
 			{
 				displayName: 'Phone',
 				name: 'phone',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'Phone number of the user.',
 			},
@@ -170,14 +170,14 @@ export const usersDescription = [
 			{
 				displayName: 'Custom Fields',
 				name: 'customfield',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of custom fields values, keyed by their ID.',
 			},
 			{
 				displayName: 'Groups',
 				name: 'groups',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of group IDs that the user belongs to.',
 			},
@@ -231,7 +231,7 @@ export const usersDescription = [
 			{
 				displayName: 'Phone',
 				name: 'phone',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'Phone number of the user.',
 			},
@@ -307,14 +307,14 @@ export const usersDescription = [
 			{
 				displayName: 'Custom Fields',
 				name: 'customfield',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of custom fields values, keyed by their ID.',
 			},
 			{
 				displayName: 'Groups',
 				name: 'groups',
-				type: 'string',
+				type: 'json',
 				default: '',
 				description: 'An array of group IDs that the user belongs to.',
 			},
