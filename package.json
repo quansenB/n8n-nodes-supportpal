@@ -28,7 +28,7 @@
 		"tslint": "tslint -p tsconfig.json -c tslint.json",
 		"watch": "tsc --watch",
 		"test": "jest",
-		"release": "npm run build && npm publish"
+		"release": "npm run build && npm publish --access public"
 	},
 	"files": [
 		"dist"
