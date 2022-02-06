@@ -61,9 +61,7 @@ export async function supportpalApiRequest(
 	for (const key in qs) {
 		try {
 			const parsedJson = JSON.parse(qs[key] as string);
-			if (parsedJson) {
-				qs[key] = parsedJson;
-			}
+			qs[key] = parsedJson;
 		} catch (e) {
 			continue;
 		}
