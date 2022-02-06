@@ -198,4 +198,66 @@ export const organisationsDescription = [
 			},
 		],
 	},
+	{
+		displayName: 'Query Parameters',
+		name: 'queryParameters',
+		type: 'collection',
+		displayOptions: {
+			show: {
+				resource: ['organisation'],
+				operation: ['getAll'],
+			},
+		},
+		default: {},
+		description: 'Query Parameters for filtering the organisations.',
+		placeholder: 'Add Parameter',
+		options: [
+			{
+				displayName: 'Brand ID',
+				name: 'brand_id',
+				type: 'number',
+				default: 0,
+				description: 'Search for organisations by the brand they are registered to.',
+			},
+			{
+				displayName: 'Custom Fields',
+				name: 'customfield',
+				type: 'json',
+				default: '',
+				description: 'Search for organisations by their custom field values, key the array by the custom field ID.',
+			},
+			{
+				displayName: 'Start',
+				name: 'start',
+				type: 'number',
+				default: 1,
+				description: 'The first result to start from.',
+			},
+			{
+				displayName: 'Limit',
+				name: 'limit',
+				type: 'number',
+				default: 50,
+				description: 'The amount of results to fetch.',
+			},
+			{
+				displayName: 'Order Column',
+				name: 'order_column',
+				type: 'string',
+				default: 'id',
+				description: 'The column to sort by.',
+			},
+			{
+				displayName: 'Order Direction',
+				name: 'order_direction',
+				type: 'options',
+				options: [
+					{ name: 'Ascending', value: 'asc' },
+					{ name: 'Descending', value: 'desc' },
+				],
+				default: 'asc',
+				description: 'The ordering of the results.',
+			},
+		],
+	},
 ] as INodeProperties[];

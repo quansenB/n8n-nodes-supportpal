@@ -128,7 +128,7 @@ export const ticketsDescription = [
 			},
 		},
 		default: {},
-		description: 'Additional optional fields of the user.',
+		description: 'Additional optional fields of the ticket.',
 		placeholder: 'Add Field',
 		options: [
 			{
@@ -152,14 +152,14 @@ export const ticketsDescription = [
 				name: 'user_firstname',
 				type: 'string',
 				default: '',
-				description: 'If a new user, set the first name of the user .',
+				description: 'If a new user, set the first name of the user.',
 			},
 			{
 				displayName: 'User Last Name',
 				name: 'user_lastname',
 				type: 'string',
 				default: '',
-				description: 'If a new user, set the last name of the user .',
+				description: 'If a new user, set the last name of the user.',
 			},
 			{
 				displayName: 'User Email',
@@ -277,7 +277,7 @@ export const ticketsDescription = [
 			},
 		},
 		default: {},
-		description: 'Additional optional fields of the user.',
+		description: 'Additional optional fields of the ticket.',
 		placeholder: 'Add Field',
 		options: [
 			{
@@ -324,6 +324,14 @@ export const ticketsDescription = [
 				type: 'number',
 				default: '',
 				description: 'Update the priority on the ticket.',
+			},
+			{
+				displayName: 'tag',
+				name: 'tag',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by ticket tag, accepts a single ID or a comma delimited string e.g. 1,2,3.',
 			},
 			{
 				displayName: 'Subject',
@@ -391,6 +399,179 @@ export const ticketsDescription = [
 				default: false,
 				description:
 					'If the ticket is locked and the user cannot add any further replies. This also closes the ticket.',
+			},
+		],
+	},
+	{
+		displayName: 'Query Parameters',
+		name: 'queryParameters',
+		type: 'collection',
+		displayOptions: {
+			show: {
+				resource: ['ticket'],
+				operation: ['getAll'],
+			},
+		},
+		default: {},
+		description: 'Query Parameters for filtering the tickets.',
+		placeholder: 'Add Parameter',
+		options: [
+			{
+				displayName: 'Filter ID',
+				name: 'filter',
+				type: 'number',
+				default: 0,
+				description:
+					'Filter by a ticket filter, will ignore all of the below filtering options if set.',
+			},
+			{
+				displayName: 'Filter Operator',
+				name: 'filter_operator',
+				type: 'number',
+				default: 0,
+				description:
+					'If filtering by a ticket filter, set which operator to run the filter as. Required if the filter is private or limited to certain operator groups.',
+			},
+			{
+				displayName: 'Ticket Number',
+				name: 'number',
+				type: 'number',
+				default: 0,
+				description: 'Search by ticket number.',
+			},
+			{
+				displayName: 'Department',
+				name: 'department',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by ticket department, accepts a single ID or a comma delimited string e.g. 1,2,3. Parent departments include children department tickets.',
+			},
+			{
+				displayName: 'Brand',
+				name: 'brand',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by ticket brand, accepts a single ID or a comma delimited string e.g. 1,2,3.',
+			},
+			{
+				displayName: 'Channel',
+				name: 'channel',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by ticket channel, accepts a single ID or a comma delimited string e.g. 1,2,3.',
+			},
+			{
+				displayName: 'Status',
+				name: 'status',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by ticket status, accepts a single ID or a comma delimited string e.g. 1,2,3.',
+			},
+			{
+				displayName: 'Priority',
+				name: 'priority',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by ticket priority, accepts a single ID or a comma delimited string e.g. 1,2,3.',
+			},
+			{
+				displayName: 'Tag',
+				name: 'tag',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by ticket tag(s), accepts a single ID or a comma delimited string e.g. 1,2,3.',
+			},
+			{
+				displayName: 'User',
+				name: 'user',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by submitting user, accepts a single ID or a comma delimited string e.g. 1,2,3.	',
+			},
+			{
+				displayName: 'User Email',
+				name: 'user_email',
+				type: 'string',
+				default: '',
+				description: 'Filter by the email address of the user.',
+			},
+			{
+				displayName: 'Organisation',
+				name: 'organisation',
+				type: 'string',
+				default: 0,
+				description:
+					'Filter by organisation, accepts a single ID or a comma delimited string e.g. 1,2,3.',
+			},
+			{
+				displayName: 'Assigned To',
+				name: 'assigned',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by assigned operator, accepts a single ID or a comma delimited string e.g. 1,2,3. Use "-1" to find unassigned tickets.',
+			},
+			{
+				displayName: 'Watching',
+				name: 'watching',
+				type: 'string',
+				default: '',
+				description:
+					'Filter by watching operator, accepts a single ID or a comma delimited string e.g. 1,2,3.',
+			},
+			{
+				displayName: 'Internal?',
+				name: 'internal',
+				type: 'boolean',
+				default: false,
+				description: 'Fetch only internal tickets (true) or non-internal tickets (false).',
+			},
+			{
+				displayName: 'Custom Fields',
+				name: 'customfield',
+				type: 'json',
+				default: '',
+				description:
+					'Filter by custom field value, an array keyed by custom field ID with a string or custom field option ID as the value. Performs an equal or contains search depending on the custom field type.',
+			},
+			{
+				displayName: 'Start',
+				name: 'start',
+				type: 'number',
+				default: 1,
+				description: 'The first result to start from.',
+			},
+			{
+				displayName: 'Limit',
+				name: 'limit',
+				type: 'number',
+				default: 50,
+				description: 'The amount of results to fetch.',
+			},
+			{
+				displayName: 'Order Column',
+				name: 'order_column',
+				type: 'string',
+				default: 'id',
+				description: 'The column to sort by.',
+			},
+			{
+				displayName: 'Order Direction',
+				name: 'order_direction',
+				type: 'options',
+				options: [
+					{ name: 'Ascending', value: 'asc' },
+					{ name: 'Descending', value: 'desc' },
+				],
+				default: 'asc',
+				description: 'The ordering of the results.',
 			},
 		],
 	},

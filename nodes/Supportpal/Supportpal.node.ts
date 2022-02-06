@@ -217,6 +217,7 @@ export class Supportpal implements INodeType {
 					else if (operation === 'getAll') {
 						requestMethod = 'GET';
 						endpoint = '/api/user/user';
+						qs = this.getNodeParameter('queryParameters', i) as IDataObject;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
 						responseData = simplify.call(this, responseData, i);
@@ -274,6 +275,7 @@ export class Supportpal implements INodeType {
 					else if (operation === 'getAll') {
 						requestMethod = 'GET';
 						endpoint = '/api/user/organisation';
+						qs = this.getNodeParameter('queryParameters', i) as IDataObject;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
 						responseData = simplify.call(this, responseData, i);
@@ -336,6 +338,7 @@ export class Supportpal implements INodeType {
 					else if (operation === 'getAll') {
 						requestMethod = 'GET';
 						endpoint = '/api/ticket/ticket';
+						qs = this.getNodeParameter('queryParameters', i) as IDataObject;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
 						responseData = simplify.call(this, responseData, i);
@@ -396,7 +399,7 @@ export class Supportpal implements INodeType {
 					else if (operation === 'getAll') {
 						requestMethod = 'GET';
 						endpoint = '/api/ticket/message';
-
+						qs = this.getNodeParameter('queryParameters', i) as IDataObject;
 						qs.ticket_id = this.getNodeParameter('ticket_id', i) as string;
 
 						responseData = await supportpalApiRequest.call(this, requestMethod, endpoint, body, qs);
