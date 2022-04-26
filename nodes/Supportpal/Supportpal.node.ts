@@ -129,7 +129,7 @@ export class Supportpal implements INodeType {
 		loadOptions: {
 			async getUserCustomFields(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
-				const users = await supportpalApiRequest.call(this, 'GET', '/api/user/customfield');
+				const users = await supportpalApiRequest.call(this, 'GET', '/api/user/customfield', {}, {limit: 1000000000});
 				for (const user of users.data) {
 					const userName = user.id + ": " + user.name;
 					const userId = user.id;
@@ -142,7 +142,7 @@ export class Supportpal implements INodeType {
 			},
 			async getOrganisationCustomFields(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
-				const organisations = await supportpalApiRequest.call(this, 'GET', '/api/user/organisationcustomfield');
+				const organisations = await supportpalApiRequest.call(this, 'GET', '/api/user/organisationcustomfield', {}, {limit: 1000000000});
 				for (const organisation of organisations.data) {
 					const organisationName = organisation.id + ": " + organisation.name;
 					const organisationId = organisation.id;
@@ -155,7 +155,7 @@ export class Supportpal implements INodeType {
 			},
 			async getTicketCustomFields(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
-				const tickets = await supportpalApiRequest.call(this, 'GET', '/api/ticket/customfield');
+				const tickets = await supportpalApiRequest.call(this, 'GET', '/api/ticket/customfield', {}, {limit: 1000000000});
 				for (const ticket of tickets.data) {
 					const ticketName = ticket.id + ": " + ticket.name;
 					const ticketId = ticket.id;
