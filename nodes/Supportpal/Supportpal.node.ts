@@ -1,11 +1,15 @@
 import { IExecuteFunctions } from 'n8n-core';
 
-import { IDataObject,
+import {
+	IDataObject,
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
 	ILoadOptionsFunctions,
-	INodePropertyOptions,} from 'n8n-workflow';
+	INodePropertyOptions,
+} from 'n8n-workflow';
+
+import { version } from '../version';
 
 import { supportpalApiRequest, simplify } from './GenericFunctions';
 import { usersDescription } from './UsersDescription';
@@ -30,7 +34,7 @@ export class Supportpal implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Consume Supportpal REST API',
+		description: `Consume Supportpal REST API (v.${version})`,
 		defaults: {
 			name: 'Supportpal',
 		},
@@ -129,9 +133,15 @@ export class Supportpal implements INodeType {
 		loadOptions: {
 			async getUserCustomFields(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
-				const users = await supportpalApiRequest.call(this, 'GET', '/api/user/customfield', {}, {limit: 1000000000});
+				const users = await supportpalApiRequest.call(
+					this,
+					'GET',
+					'/api/user/customfield',
+					{},
+					{ limit: 1000000000 },
+				);
 				for (const user of users.data) {
-					const userName = user.id + ": " + user.name;
+					const userName = user.id + ': ' + user.name;
 					const userId = user.id;
 					returnData.push({
 						name: userName,
@@ -140,11 +150,19 @@ export class Supportpal implements INodeType {
 				}
 				return returnData;
 			},
-			async getOrganisationCustomFields(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+			async getOrganisationCustomFields(
+				this: ILoadOptionsFunctions,
+			): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
-				const organisations = await supportpalApiRequest.call(this, 'GET', '/api/user/organisationcustomfield', {}, {limit: 1000000000});
+				const organisations = await supportpalApiRequest.call(
+					this,
+					'GET',
+					'/api/user/organisationcustomfield',
+					{},
+					{ limit: 1000000000 },
+				);
 				for (const organisation of organisations.data) {
-					const organisationName = organisation.id + ": " + organisation.name;
+					const organisationName = organisation.id + ': ' + organisation.name;
 					const organisationId = organisation.id;
 					returnData.push({
 						name: organisationName,
@@ -155,9 +173,15 @@ export class Supportpal implements INodeType {
 			},
 			async getTicketCustomFields(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
-				const tickets = await supportpalApiRequest.call(this, 'GET', '/api/ticket/customfield', {}, {limit: 1000000000});
+				const tickets = await supportpalApiRequest.call(
+					this,
+					'GET',
+					'/api/ticket/customfield',
+					{},
+					{ limit: 1000000000 },
+				);
 				for (const ticket of tickets.data) {
-					const ticketName = ticket.id + ": " + ticket.name;
+					const ticketName = ticket.id + ': ' + ticket.name;
 					const ticketId = ticket.id;
 					returnData.push({
 						name: ticketName,
@@ -194,7 +218,7 @@ export class Supportpal implements INodeType {
 
 						qs.email = this.getNodeParameter('email', i) as string;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
@@ -216,7 +240,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/user/user/' + userId;
 						qs = this.getNodeParameter('optionalFields', i) as IDataObject;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
 							for (const customField of customFields.fields) {
@@ -257,7 +281,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/user/user';
 						qs = this.getNodeParameter('queryParameters', i) as IDataObject;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
 							for (const customField of customFields.fields) {
@@ -280,7 +304,7 @@ export class Supportpal implements INodeType {
 
 						qs.name = this.getNodeParameter('name', i) as string;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
 							for (const customField of customFields.fields) {
@@ -301,7 +325,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/user/organisation/' + organisationId;
 						qs = this.getNodeParameter('optionalFields', i) as IDataObject;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
 							for (const customField of customFields.fields) {
@@ -342,7 +366,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/user/organisation';
 						qs = this.getNodeParameter('queryParameters', i) as IDataObject;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
 							for (const customField of customFields.fields) {
@@ -370,7 +394,7 @@ export class Supportpal implements INodeType {
 						qs.subject = this.getNodeParameter('subject', i) as string;
 						qs.text = this.getNodeParameter('text', i) as string;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
 							for (const customField of customFields.fields) {
@@ -391,7 +415,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/ticket/ticket/' + ticketId;
 						qs = this.getNodeParameter('optionalFields', i) as IDataObject;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
 							for (const customField of customFields.fields) {
@@ -432,7 +456,7 @@ export class Supportpal implements INodeType {
 						endpoint = '/api/ticket/ticket';
 						qs = this.getNodeParameter('queryParameters', i) as IDataObject;
 
-						const customFields= this.getNodeParameter('customFields', i) as customFields;
+						const customFields = this.getNodeParameter('customFields', i) as customFields;
 						if (customFields && customFields.fields && customFields.fields.length > 0) {
 							qs.customfield = [];
 							for (const customField of customFields.fields) {

@@ -1,6 +1,6 @@
 {
 	"name": "@digital-boss/n8n-nodes-supportpal",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"author": "Iñaki Breinbauer",
 	"license": "GPL-3.0",
 	"description": "Supportpal support for n8n",
@@ -33,7 +33,7 @@
 		"release": "npm run build && npm publish --access=public",
 		"version": "npm run build",
 		"postversion": "git push"
-	  },
+	},
 	"files": [
 		"dist"
 	],
@@ -62,6 +62,7 @@
 		"@types/request": "^2.48.3",
 		"@types/request-promise-native": "^1.0.17",
 		"axios": "^0.27.1",
+		"genversion": "^3.1.1",
 		"n8n-core": "^0.87.0"
 	},
 	"jest": {
